@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# Configures the server: localhost resolves to 127.0.0.2 and facebook.com to 8.8.8.8
+cp /etc/hosts ~/hosts.new
+sed -i '/[[:space:]]localhost$/d; /facebook\.com/d' ~/hosts.new
+{
+    echo "127.0.0.2 localhost"
+    echo "8.8.8.8 facebook.com"
+    cat ~/hosts.new
+} > ~/hosts.tmp
+cp -f ~/hosts.tmp /etc/hosts
